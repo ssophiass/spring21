@@ -12,3 +12,8 @@ def plot_x_by_class_y(*, table, x_column, y_column):
 
   pd.crosstab(table[x_column], table[y_column]).plot(kind='bar', figsize=(15,8), grid=True, logy=True)
   return None
+
+def mcc(*, tp, tn, fp, fn):
+  denom = (tp+fp)*(tp+fn)*(tn+fp)*(tn+fn)
+  mcc_score = 0 if denom==0 else (tp*tn-fp*fn)/denom**.5
+  return mcc_score
